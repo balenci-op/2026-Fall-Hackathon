@@ -1,0 +1,433 @@
+{
+  "metadata": {
+    "path": "Run 1 Laser Left.las",
+    "file_size_bytes": 4062508498,
+    "las_version": "1.4",
+    "point_format": 7,
+    "point_record_length": 36,
+    "point_count": 112847440,
+    "generating_software": "TRW 203.90.0.4 r4 (231020)",
+    "system_identifier": "Trimble",
+    "creation_date": "3925-01-30",
+    "crs": "unavailable: No module named 'pyproj'",
+    "scales": [
+      0.0001,
+      0.0001,
+      0.0001
+    ],
+    "offsets": [
+      2454280.0,
+      414100.0,
+      830.0
+    ],
+    "header_xyz_bounds": {
+      "min": [
+        2453806.5159,
+        413994.9309,
+        725.821
+      ],
+      "max": [
+        2454866.2842,
+        417625.6482,
+        854.0243
+      ]
+    },
+    "point_dimensions": [
+      "X",
+      "Y",
+      "Z",
+      "intensity",
+      "return_number",
+      "number_of_returns",
+      "synthetic",
+      "key_point",
+      "withheld",
+      "overlap",
+      "scanner_channel",
+      "scan_direction_flag",
+      "edge_of_flight_line",
+      "classification",
+      "user_data",
+      "scan_angle",
+      "point_source_id",
+      "gps_time",
+      "red",
+      "green",
+      "blue"
+    ],
+    "extra_or_custom_dimensions": [],
+    "vlrs": [
+      {
+        "type": "WktCoordinateSystemVlr",
+        "user_id": "LASF_Projection",
+        "record_id": 2112,
+        "description": "Coordinate System WKT",
+        "record_length": 0
+      },
+      {
+        "type": "GeoKeyDirectoryVlr",
+        "user_id": "LASF_Projection",
+        "record_id": 34735,
+        "description": "LASzip DLL 3.4 r4 (231020)",
+        "record_length": 0
+      },
+      {
+        "type": "VLR",
+        "user_id": "Origin",
+        "record_id": 101,
+        "description": "TopoDOT Scanner Origin",
+        "record_length": 24
+      }
+    ],
+    "evlrs": []
+  },
+  "processed_point_count": 112847440,
+  "numeric_statistics": {
+    "X": {
+      "available": true,
+      "count": 112847440,
+      "min": 2453806.5159,
+      "max": 2454866.2842,
+      "mean": 2454265.9855578793,
+      "standard_deviation": 223.21935594041332,
+      "median_estimate": 2454266.36485,
+      "p01_estimate": 2453913.712057,
+      "p05_estimate": 2453946.7193449996,
+      "p95_estimate": 2454699.457445,
+      "p99_estimate": 2454770.492339,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "Y": {
+      "available": true,
+      "count": 112847440,
+      "min": 413994.9309,
+      "max": 417625.6482,
+      "mean": 415674.13543767825,
+      "standard_deviation": 970.0864393303224,
+      "median_estimate": 415549.8689,
+      "p01_estimate": 414122.905551,
+      "p05_estimate": 414272.39829,
+      "p95_estimate": 417316.34167,
+      "p99_estimate": 417468.458637,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "Z": {
+      "available": true,
+      "count": 112847440,
+      "min": 725.821,
+      "max": 854.0243,
+      "mean": 783.0653360426609,
+      "standard_deviation": 14.530893730816263,
+      "median_estimate": 785.96235,
+      "p01_estimate": 755.722722,
+      "p05_estimate": 760.9901,
+      "p95_estimate": 801.8260300000001,
+      "p99_estimate": 814.8939,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "intensity": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 65279.0,
+      "mean": 19976.72848655672,
+      "standard_deviation": 3517.477568766346,
+      "median_estimate": 20560.0,
+      "p01_estimate": 5911.0,
+      "p05_estimate": 13621.0,
+      "p95_estimate": 23901.0,
+      "p99_estimate": 26728.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "return_number": {
+      "available": true,
+      "count": 112847440,
+      "min": 1.0,
+      "max": 1.0,
+      "mean": 1.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 1.0,
+      "p01_estimate": 1.0,
+      "p05_estimate": 1.0,
+      "p95_estimate": 1.0,
+      "p99_estimate": 1.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "number_of_returns": {
+      "available": true,
+      "count": 112847440,
+      "min": 1.0,
+      "max": 1.0,
+      "mean": 1.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 1.0,
+      "p01_estimate": 1.0,
+      "p05_estimate": 1.0,
+      "p95_estimate": 1.0,
+      "p99_estimate": 1.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "synthetic": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 0.0,
+      "p01_estimate": 0.0,
+      "p05_estimate": 0.0,
+      "p95_estimate": 0.0,
+      "p99_estimate": 0.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "key_point": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 0.0,
+      "p01_estimate": 0.0,
+      "p05_estimate": 0.0,
+      "p95_estimate": 0.0,
+      "p99_estimate": 0.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "withheld": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 0.0,
+      "p01_estimate": 0.0,
+      "p05_estimate": 0.0,
+      "p95_estimate": 0.0,
+      "p99_estimate": 0.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "overlap": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 0.0,
+      "p01_estimate": 0.0,
+      "p05_estimate": 0.0,
+      "p95_estimate": 0.0,
+      "p99_estimate": 0.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "scanner_channel": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 0.0,
+      "p01_estimate": 0.0,
+      "p05_estimate": 0.0,
+      "p95_estimate": 0.0,
+      "p99_estimate": 0.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "scan_direction_flag": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 0.0,
+      "p01_estimate": 0.0,
+      "p05_estimate": 0.0,
+      "p95_estimate": 0.0,
+      "p99_estimate": 0.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "edge_of_flight_line": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 0.0,
+      "p01_estimate": 0.0,
+      "p05_estimate": 0.0,
+      "p95_estimate": 0.0,
+      "p99_estimate": 0.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "classification": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 0.0,
+      "p01_estimate": 0.0,
+      "p05_estimate": 0.0,
+      "p95_estimate": 0.0,
+      "p99_estimate": 0.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "user_data": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 0.0,
+      "p01_estimate": 0.0,
+      "p05_estimate": 0.0,
+      "p95_estimate": 0.0,
+      "p99_estimate": 0.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "scan_angle": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 0.0,
+      "p01_estimate": 0.0,
+      "p05_estimate": 0.0,
+      "p95_estimate": 0.0,
+      "p99_estimate": 0.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "point_source_id": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "standard_deviation": 0.0,
+      "median_estimate": 0.0,
+      "p01_estimate": 0.0,
+      "p05_estimate": 0.0,
+      "p95_estimate": 0.0,
+      "p99_estimate": 0.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "gps_time": {
+      "available": true,
+      "count": 112847440,
+      "min": 440946815.4887656,
+      "max": 440946928.6552562,
+      "mean": 440946874.2569781,
+      "standard_deviation": 32.839730315342315,
+      "median_estimate": 440946875.2582488,
+      "p01_estimate": 440946816.7580797,
+      "p05_estimate": 440946821.55178404,
+      "p95_estimate": 440946923.1075333,
+      "p99_estimate": 440946927.41447425,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "red": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 65279.0,
+      "mean": 33000.19570798415,
+      "standard_deviation": 12787.859849579936,
+      "median_estimate": 36495.0,
+      "p01_estimate": 4883.0,
+      "p05_estimate": 10023.0,
+      "p95_estimate": 49859.0,
+      "p99_estimate": 60139.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "green": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 65279.0,
+      "mean": 34543.1203920975,
+      "standard_deviation": 11983.255300415502,
+      "median_estimate": 37523.0,
+      "p01_estimate": 7196.0,
+      "p05_estimate": 12336.0,
+      "p95_estimate": 50116.0,
+      "p99_estimate": 61681.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "blue": {
+      "available": true,
+      "count": 112847440,
+      "min": 0.0,
+      "max": 65279.0,
+      "mean": 34289.13893871228,
+      "standard_deviation": 13993.172867320718,
+      "median_estimate": 38294.0,
+      "p01_estimate": 2056.0,
+      "p05_estimate": 8738.0,
+      "p95_estimate": 51915.0,
+      "p99_estimate": 64508.0,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    }
+  },
+  "categorical_counts": {
+    "classification": {
+      "available": true,
+      "counts": {
+        "0.0": 112847440
+      },
+      "total": 112847440
+    },
+    "return_number": {
+      "available": true,
+      "counts": {
+        "1.0": 112847440
+      },
+      "total": 112847440
+    },
+    "number_of_returns": {
+      "available": true,
+      "counts": {
+        "1.0": 112847440
+      },
+      "total": 112847440
+    }
+  },
+  "return_number_by_number_of_returns": {
+    "1 x 1": 112847440
+  },
+  "read_only": true,
+  "operations_performed": [
+    "header_read",
+    "chunked_point_statistics"
+  ]
+}

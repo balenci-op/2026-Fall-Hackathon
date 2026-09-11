@@ -1,0 +1,217 @@
+LAS PROFILING REPORT
+====================
+
+Read-only: yes
+
+FILE: Run 1 Laser Left.las
+  Size: 4,062,508,498 bytes
+  Points: 112,847,440
+  LAS version / point format: 1.4 / 7
+  Record length: 36 bytes
+  System / software: Trimble / TRW 203.90.0.4 r4 (231020)
+  Creation date: 3925-01-30
+  CRS: unavailable: No module named 'pyproj'
+  Scales: [0.0001, 0.0001, 0.0001]
+  Offsets: [2454280.0, 414100.0, 830.0]
+  Header XYZ bounds: {'min': [2453806.5159, 413994.9309, 725.821], 'max': [2454866.2842, 417625.6482, 854.0243]}
+  Dimensions: X, Y, Z, intensity, return_number, number_of_returns, synthetic, key_point, withheld, overlap, scanner_channel, scan_direction_flag, edge_of_flight_line, classification, user_data, scan_angle, point_source_id, gps_time, red, green, blue
+  Extra/custom dimensions: []
+  VLRs / EVLRs: 3 / 0
+  Numeric statistics:
+    X: min=2.45381e+06, max=2.45487e+06, mean=2.45427e+06, sd=223.219, median~=2.45427e+06, p01~=2.45391e+06, p05~=2.45395e+06, p95~=2.4547e+06, p99~=2.45477e+06
+    Y: min=413995, max=417626, mean=415674, sd=970.086, median~=415550, p01~=414123, p05~=414272, p95~=417316, p99~=417468
+    Z: min=725.821, max=854.024, mean=783.065, sd=14.5309, median~=785.962, p01~=755.723, p05~=760.99, p95~=801.826, p99~=814.894
+    intensity: min=0, max=65279, mean=19976.7, sd=3517.48, median~=20560, p01~=5911, p05~=13621, p95~=23901, p99~=26728
+    return_number: min=1, max=1, mean=1, sd=0, median~=1, p01~=1, p05~=1, p95~=1, p99~=1
+    number_of_returns: min=1, max=1, mean=1, sd=0, median~=1, p01~=1, p05~=1, p95~=1, p99~=1
+    synthetic: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    key_point: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    withheld: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    overlap: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    scanner_channel: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    scan_direction_flag: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    edge_of_flight_line: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    classification: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    user_data: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    scan_angle: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    point_source_id: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    gps_time: min=4.40947e+08, max=4.40947e+08, mean=4.40947e+08, sd=32.8397, median~=4.40947e+08, p01~=4.40947e+08, p05~=4.40947e+08, p95~=4.40947e+08, p99~=4.40947e+08
+    red: min=0, max=65279, mean=33000.2, sd=12787.9, median~=36495, p01~=4883, p05~=10023, p95~=49859, p99~=60139
+    green: min=0, max=65279, mean=34543.1, sd=11983.3, median~=37523, p01~=7196, p05~=12336, p95~=50116, p99~=61681
+    blue: min=0, max=65279, mean=34289.1, sd=13993.2, median~=38294, p01~=2056, p05~=8738, p95~=51915, p99~=64508
+  Categorical counts:
+    classification: {'0.0': 112847440}
+    return_number: {'1.0': 112847440}
+    number_of_returns: {'1.0': 112847440}
+  Return cross-tab: {'1 x 1': 112847440}
+
+FILE: Run 1 Laser Right.las
+  Size: 4,042,940,446 bytes
+  Points: 112,303,883
+  LAS version / point format: 1.4 / 7
+  Record length: 36 bytes
+  System / software: Trimble / TRW 203.90.0.4 r4 (231020)
+  Creation date: 3925-01-30
+  CRS: unavailable: No module named 'pyproj'
+  Scales: [0.0001, 0.0001, 0.0001]
+  Offsets: [2454300.0, 414100.0, 800.0]
+  Header XYZ bounds: {'min': [2453810.1308, 414035.2235, 724.9398], 'max': [2454934.6825, 417544.4296, 854.4331]}
+  Dimensions: X, Y, Z, intensity, return_number, number_of_returns, synthetic, key_point, withheld, overlap, scanner_channel, scan_direction_flag, edge_of_flight_line, classification, user_data, scan_angle, point_source_id, gps_time, red, green, blue
+  Extra/custom dimensions: []
+  VLRs / EVLRs: 3 / 0
+  Numeric statistics:
+    X: min=2.45381e+06, max=2.45493e+06, mean=2.45427e+06, sd=223.628, median~=2.45427e+06, p01~=2.45391e+06, p05~=2.45395e+06, p95~=2.4547e+06, p99~=2.45478e+06
+    Y: min=414035, max=417544, mean=415676, sd=968.465, median~=415570, p01~=414121, p05~=414270, p95~=417312, p99~=417459
+    Z: min=724.94, max=854.433, mean=782.921, sd=14.7094, median~=785.856, p01~=751.772, p05~=760.856, p95~=801.623, p99~=814.942
+    intensity: min=0, max=65279, mean=19424.8, sd=3760.56, median~=20046, p01~=4883, p05~=12336, p95~=24158, p99~=26471
+    return_number: min=1, max=1, mean=1, sd=0, median~=1, p01~=1, p05~=1, p95~=1, p99~=1
+    number_of_returns: min=1, max=1, mean=1, sd=0, median~=1, p01~=1, p05~=1, p95~=1, p99~=1
+    synthetic: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    key_point: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    withheld: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    overlap: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    scanner_channel: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    scan_direction_flag: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    edge_of_flight_line: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    classification: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    user_data: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    scan_angle: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    point_source_id: min=0, max=0, mean=0, sd=0, median~=0, p01~=0, p05~=0, p95~=0, p99~=0
+    gps_time: min=4.40947e+08, max=4.40947e+08, mean=4.40947e+08, sd=32.8491, median~=4.40947e+08, p01~=4.40947e+08, p05~=4.40947e+08, p95~=4.40947e+08, p99~=4.40947e+08
+    red: min=0, max=65279, mean=31491.2, sd=13119.4, median~=34696, p01~=4883, p05~=9509, p95~=49345, p99~=58854
+    green: min=0, max=65279, mean=33049.3, sd=12412.2, median~=35724, p01~=7196, p05~=11308, p95~=49602, p99~=59368
+    blue: min=0, max=65279, mean=32509.8, sd=14684.7, median~=36238, p01~=1799, p05~=8481, p95~=51401, p99~=62452
+  Categorical counts:
+    classification: {'0.0': 112303883}
+    return_number: {'1.0': 112303883}
+    number_of_returns: {'1.0': 112303883}
+  Return cross-tab: {'1 x 1': 112303883}
+
+LEFT/RIGHT COMPARISON
+======================
+{
+  "left_point_count": 112847440,
+  "right_point_count": 112303883,
+  "left_xyz_bounds": {
+    "min": [
+      2453806.5159,
+      413994.9309,
+      725.821
+    ],
+    "max": [
+      2454866.2842,
+      417625.6482,
+      854.0243
+    ]
+  },
+  "right_xyz_bounds": {
+    "min": [
+      2453810.1308,
+      414035.2235,
+      724.9398
+    ],
+    "max": [
+      2454934.6825,
+      417544.4296,
+      854.4331
+    ]
+  },
+  "common_bounding_region": {
+    "min": [
+      2453810.1308,
+      414035.2235,
+      725.821
+    ],
+    "max": [
+      2454866.2842,
+      417544.4296,
+      854.0243
+    ],
+    "volume": 475154756.73710215
+  },
+  "approximate_density_points_per_cubic_unit": {
+    "left": 0.22876477230122488,
+    "right": 0.2197653261920285
+  },
+  "gps_time_ranges": {
+    "left": {
+      "available": true,
+      "count": 112847440,
+      "min": 440946815.4887656,
+      "max": 440946928.6552562,
+      "mean": 440946874.2569781,
+      "standard_deviation": 32.839730315342315,
+      "median_estimate": 440946875.2582488,
+      "p01_estimate": 440946816.7580797,
+      "p05_estimate": 440946821.55178404,
+      "p95_estimate": 440946923.1075333,
+      "p99_estimate": 440946927.41447425,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    },
+    "right": {
+      "available": true,
+      "count": 112303883,
+      "min": 440946815.4950929,
+      "max": 440946928.417928,
+      "mean": 440946874.39005804,
+      "standard_deviation": 32.84908320626415,
+      "median_estimate": 440946876.0200841,
+      "p01_estimate": 440946816.7622105,
+      "p05_estimate": 440946821.51752293,
+      "p95_estimate": 440946923.066998,
+      "p99_estimate": 440946927.23407346,
+      "percentile_method": "reservoir_sample",
+      "percentile_sample_count": 200000
+    }
+  },
+  "available_dimensions": {
+    "left": [
+      "X",
+      "Y",
+      "Z",
+      "intensity",
+      "return_number",
+      "number_of_returns",
+      "synthetic",
+      "key_point",
+      "withheld",
+      "overlap",
+      "scanner_channel",
+      "scan_direction_flag",
+      "edge_of_flight_line",
+      "classification",
+      "user_data",
+      "scan_angle",
+      "point_source_id",
+      "gps_time",
+      "red",
+      "green",
+      "blue"
+    ],
+    "right": [
+      "X",
+      "Y",
+      "Z",
+      "intensity",
+      "return_number",
+      "number_of_returns",
+      "synthetic",
+      "key_point",
+      "withheld",
+      "overlap",
+      "scanner_channel",
+      "scan_direction_flag",
+      "edge_of_flight_line",
+      "classification",
+      "user_data",
+      "scan_angle",
+      "point_source_id",
+      "gps_time",
+      "red",
+      "green",
+      "blue"
+    ]
+  },
+  "schemas_match": true
+}

@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>LiDAR candidate review</title>
+  <style>
+    :root{--ink:#152638;--muted:#617083;--line:#dbe2e8;--paper:#f4f6f8;--card:#fff;--blue:#1359a0;--blue-light:#eaf2fb;--teal:#086c62;--red:#a32e37;--amber:#835317;--radius:12px;--shadow:0 2px 9px #172c4410}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button,a,input,select,textarea,summary{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:default;opacity:.48}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #49a2ec;outline-offset:3px}button,input,select,textarea{border-radius:7px}button{min-height:38px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:8px 13px;font-weight:600}button:hover:not(:disabled){background:#f0f5fa;border-color:#aabed0}input,select,textarea{width:100%;border:1px solid #bac7d3;background:#fff;color:var(--ink);padding:9px 10px;min-height:40px}textarea{resize:vertical;min-height:98px}input::placeholder,textarea::placeholder{color:#7b8997}h1,h2,h3,p{margin:0}h1{font-size:20px;line-height:1.2;letter-spacing:-.5px}h2{font-size:17px;letter-spacing:-.2px}h3{font-size:14px}a{color:var(--blue)}[hidden]{display:none!important}.muted{color:var(--muted)}.small{font-size:12px}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.eyebrow{font-size:10px;font-weight:750;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
+    .topbar{background:#142a3b;color:#fff;padding:18px max(24px,calc((100vw - 1600px)/2));display:flex;gap:24px;justify-content:space-between;align-items:center}.brand{display:flex;gap:12px;align-items:center}.brandmark{width:34px;height:34px;display:grid;grid-template-columns:repeat(3,6px);gap:4px;align-content:center;justify-content:center;transform:rotate(-12deg)}.brandmark i{border-radius:50%;background:#84d0c4;width:6px;height:6px}.brandmark i:nth-child(2n){opacity:.5}.brand-sub{color:#bed0dd;font-size:12px;margin-top:5px}.top-right{display:flex;align-items:center;gap:26px}.reviewer{display:flex;align-items:center;gap:8px}.reviewer label{font-size:12px;color:#d5e0e8}.reviewer input{width:155px;min-height:34px;padding:6px 9px;background:#203b50;border-color:#4a6375;color:#fff}.reviewer input::placeholder{color:#b3c2ce}.progress-wrap{min-width:150px;font-size:12px;color:#d5e0e8}.progress-wrap strong{color:white;font-size:16px;margin-right:4px}progress{display:block;width:100%;height:5px;margin-top:7px;accent-color:#73c9b9;border:0;border-radius:4px;overflow:hidden}progress::-webkit-progress-bar{background:#385162}progress::-webkit-progress-value{background:#73c9b9}
+    .shell{max-width:1600px;margin:auto;padding:20px 24px 30px}.notice{display:flex;align-items:center;gap:12px;border:1px solid;padding:11px 14px;border-radius:8px;margin-bottom:14px;font-size:13px}.notice p{flex:1}.success{background:#eaf6ef;color:#176143;border-color:#b5d8c3}.error{background:#fff1f1;color:#8b2330;border-color:#e4b7bf}.error button{border-color:#d8a9b2;color:#8b2330;font-size:12px;white-space:nowrap}.nav-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:15px 18px;margin-bottom:18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:14px}.candidate-select{flex:1;max-width:530px}.candidate-select label{display:block;margin-bottom:4px}.nav-buttons{display:flex;gap:8px;align-self:flex-end}.nav-meta{margin-left:auto;display:flex;gap:13px;align-items:center}.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:99px;background:#edf1f5;color:#516275;font-size:11px;font-weight:650;white-space:nowrap}.badge.saved{background:#e7f5ee;color:#176143}.badge::before{content:"";width:6px;height:6px;background:currentColor;border-radius:100%}.count-text{font-size:12px;color:var(--muted);white-space:nowrap}
+    .workspace{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:20px;align-items:start}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.card-head{padding:16px 18px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.subline{font-size:12px;color:var(--muted);margin-top:5px}.plot-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:0 18px 12px;flex-wrap:wrap}.segments{display:flex;border:1px solid #c7d3de;border-radius:7px;overflow:hidden}.segments button{min-height:34px;border:0;border-radius:0;padding:7px 12px;font-size:12px;font-weight:600;white-space:nowrap}.segments button+button{border-left:1px solid #d8e0e7}.segments button[aria-pressed=true]{background:var(--blue);color:#fff}.view-tools{display:flex;align-items:center;gap:7px}.view-tools select{font-size:12px;min-height:34px;width:115px;padding:5px 8px}.view-tools button{min-height:34px;font-size:12px;padding:5px 9px}.plot-shell{position:relative;border-top:1px solid #edf1f5;border-bottom:1px solid #edf1f5;background:#fbfcfd}.plot{height:510px;width:100%}.plot-fallback{height:510px;display:grid;place-items:center;color:var(--muted);padding:35px;text-align:center}.plot-note{display:flex;gap:16px;flex-wrap:wrap;padding:10px 18px;font-size:11px;color:var(--muted);align-items:center}.key{display:inline-flex;gap:6px;align-items:center}.key::before{content:"";width:9px;height:9px;border-radius:2px;background:#587760}.key.context::before{background:#bbc5c3}.key.box::before{background:none;border:1px solid #db2777}.plot-key-hint{margin-left:auto}.units{margin:0;padding:10px 18px 12px;font-size:11px;color:var(--muted);border-top:1px solid #edf1f5}.image-section{margin-top:17px}.image-header{display:flex;justify-content:space-between;align-items:baseline;margin:0 2px 9px}.image-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.image-tile{padding:0;overflow:hidden;background:white;border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow);font-weight:500;min-width:0}.image-tile img{display:block;width:100%;aspect-ratio:1;object-fit:contain;background:#f5f5f5}.image-tile span{display:block;text-align:left;padding:8px 11px;font-size:12px}.image-tile:hover img{filter:brightness(.98)}.warning{margin:13px 0 0;padding:10px 13px;color:var(--amber);border:1px solid #e8d5b3;border-left:3px solid #bb842e;background:#fffbf2;border-radius:7px;font-size:12px}.metadata{margin-top:16px;padding:15px 17px}.metadata-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}.metadata dt{font-size:11px;color:var(--muted);margin-bottom:3px}.metadata dd{font-size:12px;margin:0;overflow-wrap:anywhere}.overlap-links{display:flex;flex-wrap:wrap;gap:5px}.overlap-links button{font-size:11px;padding:3px 7px;min-height:27px}.group-note{font-size:11px;color:var(--muted);margin-top:13px;border-top:1px solid #edf1f5;padding-top:10px}
+    .review-panel{position:sticky;top:18px}.review-head{background:#f9fbfd;border-bottom:1px solid var(--line);padding:17px 18px}.scope{margin-top:8px;color:var(--blue);font-size:12px;font-weight:650}.review-form{padding:17px 18px}.field{margin-bottom:17px}.field>label{font-size:12px;font-weight:700;display:block;margin-bottom:6px}.field .help{font-size:11px;color:var(--muted);margin-top:5px}.custom-field{margin-top:8px}.custom-field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.optional{font-size:11px;font-weight:400;color:var(--muted)}.review-status{font-size:11px;margin-bottom:15px;color:var(--muted);min-height:17px}.review-status.dirty{color:#916020}.group-override{border-top:1px solid #e7edf2;margin-top:4px;padding-top:12px;margin-bottom:18px}.group-override summary{font-size:12px;color:var(--muted);cursor:pointer}.group-override .field{margin:10px 0 0}.primary{background:var(--blue);border-color:var(--blue);color:#fff;width:100%;min-height:45px;font-size:14px}.primary:hover:not(:disabled){background:#104d8b;border-color:#104d8b}.save-help{font-size:11px;color:var(--muted);text-align:center;margin-top:8px}.reveal-section{border-top:1px solid var(--line);padding:16px 18px;background:#f9fbfd}.reveal-section h3{font-size:12px}.reveal-section .muted{font-size:11px;margin-top:5px}.reveal-button{font-size:12px;width:100%;margin-top:11px;color:var(--blue);border-color:#bed0e2;background:#fff}.revealed{padding:15px 18px;border-top:1px solid var(--line);max-height:570px;overflow:auto}.revealed>p{font-size:11px;color:var(--muted);margin-bottom:12px}.prediction-block+.prediction-block{margin-top:17px}.prediction-block h3{font-size:12px;margin-bottom:6px}.prediction-block .note{font-size:10px;color:var(--muted);margin:5px 0}.ranking{width:100%;border-collapse:collapse;font-size:11px}.ranking td,.ranking th{padding:6px 3px;border-bottom:1px solid #e7edf2;text-align:left;vertical-align:top}.ranking th{font-weight:600;color:var(--muted)}.ranking td:last-child,.ranking th:last-child{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}.geometry-details{margin-top:16px}.geometry-details summary{font-size:12px;cursor:pointer;font-weight:650}.geometry-content{overflow:auto}.geometry-content pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:10px;color:#536477;margin:8px 0}.footer{margin-top:23px;display:flex;justify-content:space-between;gap:14px;color:var(--muted);font-size:11px;align-items:center}.exports{display:flex;gap:15px;flex-wrap:wrap}.exports a{font-size:12px;text-decoration:none}.exports a:hover{text-decoration:underline}.loading-bar{height:3px;background:linear-gradient(90deg,transparent,#4383bb,transparent);position:fixed;top:0;left:0;right:0;z-index:30;animation:loading 1.1s ease-in-out infinite}@keyframes loading{0%,100%{opacity:.25}50%{opacity:1}}.empty{padding:60px 25px;text-align:center;color:var(--muted)}dialog{padding:0;border:1px solid #8195a8;border-radius:12px;max-width:min(800px,92vw);background:#fff;box-shadow:0 18px 70px #142a3b44}dialog::backdrop{background:#15263899}dialog img{display:block;width:min(720px,86vw);max-height:75vh;object-fit:contain;background:#f5f5f5}.dialog-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;gap:25px}.dialog-head h2{font-size:15px}.dialog-head button{font-size:12px;min-height:32px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(min-width:1450px){.workspace{grid-template-columns:minmax(0,1fr) 380px}.plot{height:570px}.plot-fallback{height:570px}}
+    @media(max-width:1100px){.topbar{padding:16px 20px}.top-right{gap:16px}.workspace{grid-template-columns:minmax(0,1fr) 315px;gap:15px}.shell{padding:16px}.plot{height:440px}.plot-fallback{height:440px}.plot-key-hint{margin-left:0}.nav-meta .count-text{display:none}.image-grid{gap:7px}.image-tile span{padding:7px}.review-form,.review-head,.reveal-section,.revealed{padding-left:15px;padding-right:15px}.view-tools{margin-left:auto}}
+    @media(max-width:850px){.workspace{grid-template-columns:minmax(0,1fr)}.review-panel{position:static}.topbar{align-items:flex-start}.top-right{flex-direction:column;align-items:flex-end;gap:8px}.progress-wrap{min-width:155px}.nav-card{flex-wrap:wrap;gap:10px}.candidate-select{max-width:none;flex-basis:65%}.nav-meta{display:none}.nav-buttons{margin-left:auto}.plot{height:470px}.plot-fallback{height:470px}.review-form{display:grid;grid-template-columns:1fr 1fr;column-gap:20px}.review-status,.notes-field,.group-override,.save-area{grid-column:1/-1}.review-status{margin-bottom:14px}.revealed{max-height:none}.footer{align-items:flex-start}.plot-tools{gap:8px}}
+    @media(max-width:540px){.topbar{padding:14px}.brandmark{display:none}h1{font-size:17px}.brand-sub{font-size:10px}.reviewer{display:block}.reviewer label{display:none}.reviewer input{width:140px}.progress-wrap{min-width:140px}.progress-wrap strong{font-size:14px}.shell{padding:12px}.nav-card{padding:12px}.candidate-select{flex-basis:100%}.nav-buttons{margin-left:0;width:100%;justify-content:space-between}.nav-buttons button{flex:1}.plot-tools{padding-left:12px;padding-right:12px}.segments{width:100%}.segments button{flex:1;padding:7px}.view-tools{margin-left:auto}.plot{height:370px}.plot-fallback{height:370px}.image-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card-head{padding:14px 12px 10px}.metadata-grid{grid-template-columns:1fr}.review-form{display:block}.notice{align-items:flex-start;flex-wrap:wrap}.footer{flex-direction:column}.plot-note{padding:9px 12px;gap:9px}.units{padding:9px 12px}.image-header .small{font-size:10px}}
+    @media(prefers-reduced-motion:reduce){.loading-bar{animation:none}}
+  </style>
+</head>
+<body>
+  <div id="loadingBar" class="loading-bar" hidden aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brand"><div class="brandmark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div><h1>LiDAR candidate review</h1><p class="brand-sub">Inspect the points. Record your assessment.</p></div></div>
+    <div class="top-right"><div class="reviewer"><label for="reviewerName">Reviewer</label><input id="reviewerName" type="text" placeholder="Your name" maxlength="120" autocomplete="name" aria-label="Reviewer name"></div><div class="progress-wrap"><span id="progressText"><strong>—</strong> reviewed</span><progress id="reviewProgress" max="1" value="0" aria-label="Candidates reviewed"></progress></div></div>
+  </header>
+  <main class="shell" id="app" aria-busy="true">
+    <div id="saveNotice" class="notice success" role="status" aria-live="polite" hidden><p id="saveMessage"></p></div>
+    <div id="errorNotice" class="notice error" role="alert" hidden><p id="errorMessage"></p><button id="conflictReload" type="button" hidden>Load latest review (replace draft)</button><button id="dismissError" type="button" aria-label="Dismiss error">Dismiss</button></div>
+    <nav class="nav-card" aria-label="Candidate navigation">
+      <div class="candidate-select"><label class="eyebrow" for="candidateSelect">Candidate queue</label><select id="candidateSelect" disabled aria-describedby="queueHint"><option>Loading candidates…</option></select><span id="queueHint" class="sr-only">Unsaved form choices are kept while you move between candidates.</span></div>
+      <div class="nav-buttons"><button id="previousButton" type="button" disabled>← Previous</button><button id="nextButton" type="button" disabled>Next →</button></div>
+      <div class="nav-meta"><span id="positionText" class="count-text"></span><span id="reviewBadge" class="badge">Not reviewed</span></div>
+    </nav>
+    <div id="emptyState" class="card empty" hidden>No review candidates are configured.</div>
+    <div class="workspace" id="workspace">
+      <section aria-label="Candidate visualization">
+        <div class="card">
+          <div class="card-head"><div><h2 id="candidateTitle">Loading candidate…</h2><p id="pointCounts" class="subline">Original RGB point cloud</p></div><span class="eyebrow" style="padding-top:4px">3D inspection</span></div>
+          <div class="plot-tools">
+            <div><div class="small muted" style="font-size:10px;margin-bottom:4px">3D viewing mode</div><div class="segments" role="group" aria-label="3D viewing mode"><button type="button" data-mode="candidate" aria-pressed="false">Candidate only</button><button type="button" data-mode="context" aria-pressed="false">Context only</button><button type="button" data-mode="combined" aria-pressed="true">Combined</button></div></div>
+            <div class="view-tools"><label class="sr-only" for="cameraSelect">Camera angle</label><select id="cameraSelect"><option value="oblique">Oblique</option><option value="front">Front</option><option value="side">Side</option><option value="top">Top</option></select><button id="resetView" type="button">Reset view</button></div>
+          </div>
+          <div class="plot-shell"><div id="pointPlot" class="plot" aria-label="Interactive RGB point cloud"></div><div id="plotFallback" class="plot-fallback" hidden></div></div>
+          <div class="plot-note"><span class="key">Candidate · original RGB</span><span class="key context">Context · faded in combined view</span><span class="key box">Candidate bounds</span><span class="plot-key-hint">Drag to rotate · scroll to zoom</span></div>
+          <p class="units">Coordinate units are unresolved: LAS headers declare US survey feet; export sidecars say metres. These are sampled points, not reconstructed surfaces.</p>
+        </div>
+        <div id="candidateWarning" class="warning" hidden></div>
+        <section class="image-section" aria-labelledby="imageHeading"><div class="image-header"><h3 id="imageHeading">Saved RGB views</h3><span class="small muted">Static views · click to enlarge</span></div><div id="imageGrid" class="image-grid"></div><p id="noImages" class="small muted" hidden>No saved images are available.</p><p id="staticViewNote" class="small muted" style="margin-top:8px">The 3D viewing mode affects the interactive cloud only. Saved wider-region images include the candidate.</p></section>
+        <section class="card metadata" aria-label="Region and overlap information"><dl class="metadata-grid"><div><dt>Region group</dt><dd id="regionId">—</dd></div><div><dt>Possible shared object group</dt><dd id="sharedGroup">—</dd></div><div><dt>Possible overlap with</dt><dd id="overlapIds">—</dd></div><div><dt>Saved review history</dt><dd id="historyCount">—</dd></div></dl><p class="group-note">Region and overlap groups are conservative review aids. They do not establish that two candidates are the same object.</p></section>
+      </section>
+      <aside class="card review-panel" aria-labelledby="reviewHeading">
+        <div class="review-head"><span class="eyebrow">Your assessment</span><h2 id="reviewHeading" style="margin-top:3px">Review this candidate</h2><p class="scope">Label the candidate, not the surrounding scene.</p></div>
+        <form id="reviewForm" class="review-form">
+          <p id="draftStatus" class="review-status" aria-live="polite">Choose Unknown when the object is not clear.</p>
+          <div class="field"><label for="humanClass">Object class</label><select id="humanClass" name="human_class"><option value="__unknown__">Unknown / cannot identify</option></select><div id="customClassField" class="custom-field" hidden><label for="customClass">Your class name</label><input id="customClass" type="text" maxlength="180" placeholder="Enter a class" disabled></div><p class="help">Your assessment is stored separately from model suggestions.</p></div>
+          <div class="field"><label for="cropQuality">Crop quality <span class="optional">· required</span></label><select id="cropQuality" name="crop_quality" required><option value="unclear">Unclear</option></select><p class="help">Consider completeness, nearby objects, and remaining ground.</p></div>
+          <div class="field notes-field"><label for="reviewNotes">Notes <span class="optional">· optional</span></label><textarea id="reviewNotes" name="notes" rows="4" maxlength="10000" placeholder="What supports your assessment? What is missing or uncertain?"></textarea></div>
+          <details class="group-override"><summary>Optional: link a shared object</summary><div class="field"><label for="groupOverride">Shared object group</label><input id="groupOverride" type="text" maxlength="180" placeholder="Group identifier"><p class="help">Use the same group for candidates you believe show the same object across regions. The region group above stays unchanged.</p></div></details>
+          <div class="save-area"><button id="saveNext" class="primary" type="submit" disabled>Save & next →</button><p class="save-help">Saves your review and resumes here next time.</p></div>
+        </form>
+        <section class="reveal-section" aria-labelledby="revealHeading"><h3 id="revealHeading">Optional model and geometry details</h3><p class="muted">Start with your own assessment. Revealing these details is recorded with your review.</p><button id="revealButton" type="button" class="reveal-button" disabled>Reveal suggestions & geometry</button></section>
+        <section id="revealedPanel" class="revealed" aria-label="Revealed model and geometry details" hidden></section>
+      </aside>
+    </div>
+    <footer class="footer"><p>Local review workspace · original data and saved experiment outputs remain preserved.</p><div class="exports"><a href="/api/export" download>Download reviews CSV</a><a href="/api/manifest" download>Download review manifest</a></div></footer>
+  </main>
+  <dialog id="imageDialog" aria-labelledby="imageDialogTitle"><div class="dialog-head"><h2 id="imageDialogTitle">Candidate view</h2><button id="closeImage" type="button">Close</button></div><img id="largeImage" alt=""></dialog>
+  <script src="/plotly.js"></script>
+  <script>
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const app = {state:null, candidate:null, drafts:new Map(), busy:false, saving:false, plotReady:false, mode:'combined', positionQueue:Promise.resolve(), revealed:false};
+  const number = value => Number.isFinite(Number(value)) ? Number(value).toLocaleString() : '—';
+  const text = (element, value) => { element.textContent = value == null ? '—' : String(value); };
+  const displayId = candidate => candidate.display_id || candidate.id || 'Candidate';
+  const values = entries => (entries || []).map(item => typeof item === 'string' ? {value:item,label:item} : {value:String(item.value ?? item.id ?? item.label),label:String(item.label ?? item.value ?? item.id)});
+  const titleCase = value => value ? value.charAt(0).toUpperCase() + value.slice(1) : value;
+
+  async function api(path, options={}) {
+    if (!path.startsWith('/api/')) throw new Error('Only local review API requests are allowed.');
+    const headers = {'Accept':'application/json'};
+    const init = {method:options.method || 'GET',headers,cache:'no-store',credentials:'same-origin',redirect:'error'};
+    if (options.body !== undefined) {
+      if (!app.state?.session_token) throw new Error('The review session token is missing. Reload this page.');
+      headers['Content-Type'] = 'application/json';
+      headers['X-Review-Token'] = app.state.session_token;
+      init.body = JSON.stringify(options.body);
+    }
+    let response;
+    try { response = await fetch(path, init); }
+    catch (error) { throw new Error('Cannot reach the local review server. Keep it running, then try again.'); }
+    let result;
+    try { result = await response.json(); }
+    catch (error) { throw new Error(`The local server returned an unreadable response (${response.status}).`); }
+    if (!response.ok || result.error) {
+      const problem = result.error?.message || result.error || result.message || `Request failed (${response.status}).`;
+      const error = new Error(String(problem)); error.status = response.status; throw error;
+    }
+    return result;
+  }
+
+  function showError(error, conflict=false) {
+    text($('errorMessage'), error?.message || error);
+    $('errorNotice').hidden = false;
+    $('conflictReload').hidden = !conflict;
+  }
+  function clearError() { $('errorNotice').hidden = true; $('conflictReload').hidden = true; }
+  function saveNotice(message) { text($('saveMessage'), message); $('saveNotice').hidden = false; }
+  function setBusy(value) {
+    app.busy = value;
+    $('loadingBar').hidden = !value;
+    $('app').setAttribute('aria-busy', String(value));
+    $('candidateSelect').disabled = value || !app.state?.candidates?.length;
+    $('saveNext').disabled = value || !app.candidate;
+    $('revealButton').disabled = value || !app.candidate || app.revealed;
+    $('reviewerName').disabled = value;
+    for (const input of $('reviewForm').querySelectorAll('input,select,textarea')) input.disabled = value;
+    if (!value) $('customClass').disabled = $('humanClass').value !== '__custom__';
+    for (const control of document.querySelectorAll('[data-mode],#cameraSelect,#resetView')) control.disabled = value || !app.plotReady;
+    updateNavigation();
+  }
+  function updateProgress(progress) {
+    if (!progress) return;
+    const reviewed = Number(progress.reviewed) || 0, total = Number(progress.total) || 0;
+    $('progressText').replaceChildren();
+    const strong = document.createElement('strong'); text(strong, `${number(reviewed)} / ${number(total)}`);
+    $('progressText').append(strong, document.createTextNode(' reviewed'));
+    $('reviewProgress').max = Math.max(total,1); $('reviewProgress').value = reviewed;
+  }
+  function populateQueue() {
+    const select = $('candidateSelect'); select.replaceChildren();
+    (app.state.candidates || []).forEach((candidate,index) => {
+      const option = document.createElement('option'); option.value = candidate.id;
+      text(option, `${index+1}. ${displayId(candidate)} · ${number(candidate.point_count)} points${candidate.reviewed ? ' · reviewed' : ''}`);
+      select.append(option);
+    });
+    if (app.candidate) select.value = app.candidate.id;
+  }
+  function updateNavigation() {
+    const candidates = app.state?.candidates || [];
+    const index = candidates.findIndex(candidate => candidate.id === app.candidate?.id);
+    $('previousButton').disabled = app.busy || index <= 0;
+    $('nextButton').disabled = app.busy || index < 0 || index >= candidates.length-1;
+    text($('positionText'), index >= 0 ? `${index+1} of ${candidates.length}` : '');
+  }
+  function populateClasses() {
+    const select = $('humanClass'); select.replaceChildren();
+    const unknown = document.createElement('option'); unknown.value = '__unknown__'; text(unknown,'Unknown / cannot identify'); select.append(unknown);
+    for (const choice of values(app.state.classes)) {
+      if (!choice.value || ['unknown','__unknown__'].includes(choice.value.toLowerCase())) continue;
+      const option = document.createElement('option'); option.value = choice.value; text(option,choice.label); select.append(option);
+    }
+    const custom = document.createElement('option'); custom.value = '__custom__'; text(custom,'Custom class…'); select.append(custom);
+    const quality = $('cropQuality'); quality.replaceChildren();
+    const choices = values(app.state.crop_qualities);
+    for (const choice of (choices.length ? choices : [{value:'unclear',label:'Unclear'}])) {
+      const option = document.createElement('option'); option.value = choice.value; text(option,titleCase(choice.label)); quality.append(option);
+    }
+  }
+  function toggleCustom(focus=false) {
+    const custom = $('humanClass').value === '__custom__';
+    $('customClassField').hidden = !custom; $('customClass').disabled = !custom; $('customClass').required = custom;
+    if (focus && custom) $('customClass').focus();
+  }
+  function formValues() {
+    const selection = $('humanClass').value;
+    return {human_class:selection === '__unknown__' ? null : selection === '__custom__' ? $('customClass').value.trim() : selection,
+            custom_selected:selection === '__custom__', custom_value:$('customClass').value,
+            crop_quality:$('cropQuality').value, notes:$('reviewNotes').value,
+            group_override:$('groupOverride').value.trim()};
+  }
+  function initialDraft(candidate) {
+    const review = candidate.review || {};
+    const qualityValues = [...$('cropQuality').options].map(option=>option.value);
+    return {human_class:review.human_class ?? null, custom_selected:false, custom_value:'',
+            crop_quality:review.crop_quality || (qualityValues.includes('unclear') ? 'unclear' : qualityValues[0]),
+            notes:review.notes || '', group_override:review.shared_object_group_override ?? candidate.shared_object_group ?? '', dirty:false};
+  }
+  function fillForm(draft) {
+    const known = [...$('humanClass').options].some(option=>option.value === draft.human_class);
+    if (draft.human_class == null && !draft.custom_selected) $('humanClass').value = '__unknown__';
+    else $('humanClass').value = known && !draft.custom_selected ? draft.human_class : '__custom__';
+    $('customClass').value = draft.custom_value || (!known && draft.human_class ? draft.human_class : '');
+    $('cropQuality').value = draft.crop_quality;
+    if (!$('cropQuality').value) $('cropQuality').value = [...$('cropQuality').options].some(option=>option.value==='unclear') ? 'unclear' : $('cropQuality').options[0]?.value || '';
+    $('reviewNotes').value = draft.notes || ''; $('groupOverride').value = draft.group_override || '';
+    toggleCustom(); updateDraftStatus(draft);
+  }
+  function updateDraftStatus(draft) {
+    $('draftStatus').classList.toggle('dirty', Boolean(draft?.dirty));
+    if (draft?.dirty) text($('draftStatus'),'Unsaved draft · kept while navigating this page');
+    else if (app.candidate?.review) text($('draftStatus'),`Saved review loaded · revision ${app.candidate.history_count || 1}`);
+    else text($('draftStatus'),'Not reviewed · Unknown and Unclear are valid choices');
+  }
+  function captureDraft(markDirty=false) {
+    if (!app.candidate) return;
+    const previous = app.drafts.get(app.candidate.id);
+    const draft = {...formValues(),dirty:markDirty || Boolean(previous?.dirty)};
+    app.drafts.set(app.candidate.id,draft); updateDraftStatus(draft);
+  }
+  function queuePosition(candidateId, reviewerName) {
+    app.positionQueue = app.positionQueue.catch(()=>{}).then(()=>api('/api/position',{method:'POST',body:{candidate_id:candidateId,reviewer_name:reviewerName}}));
+    return app.positionQueue;
+  }
+  function safeImageUrl(raw) {
+    const url = new URL(raw,location.href);
+    if (url.origin !== location.origin || !['http:','https:'].includes(url.protocol)) throw new Error('An image URL is outside the local review server.');
+    return url.pathname + url.search;
+  }
+  function renderImages(candidate) {
+    $('imageGrid').replaceChildren();
+    const images = candidate.images || []; $('noImages').hidden = images.length > 0;
+    images.forEach((entry,index) => {
+      const button = document.createElement('button'); button.type='button'; button.className='image-tile';
+      const label = entry.label || `View ${index+1}`;
+      const description=entry.kind==='context' ? 'original RGB wider region including the candidate' : entry.kind==='locator' ? 'candidate location in the wider original RGB region' : 'original RGB candidate points';
+      const image = document.createElement('img'); image.src=safeImageUrl(entry.url); image.alt=`${label}: ${description}`; image.loading='lazy';
+      const caption = document.createElement('span'); text(caption,label);
+      button.append(image,caption); button.setAttribute('aria-label',`Enlarge ${label.toLowerCase()} view`);
+      button.addEventListener('click',()=>{$('largeImage').src=image.src; $('largeImage').alt=image.alt; text($('imageDialogTitle'),`${displayId(candidate)} · ${label}`); $('imageDialog').showModal();});
+      $('imageGrid').append(button);
+    });
+  }
+  function renderMetadata(candidate) {
+    text($('regionId'),candidate.region_id || 'Not assigned');
+    text($('sharedGroup'),candidate.shared_object_group || 'Not assigned');
+    text($('historyCount'),`${number(candidate.history_count || 0)} saved revision${candidate.history_count===1 ? '' : 's'}`);
+    const overlap = $('overlapIds'); overlap.replaceChildren(); overlap.className='overlap-links';
+    for (const id of candidate.overlap_ids || []) {
+      const neighbor = app.state.candidates.find(item=>item.id===id);
+      if (!neighbor) { const span=document.createElement('span'); text(span,id); overlap.append(span); continue; }
+      const button=document.createElement('button'); button.type='button'; text(button,displayId(neighbor));
+      button.addEventListener('click',()=>loadCandidate(id)); overlap.append(button);
+    }
+    if (!(candidate.overlap_ids || []).length) text(overlap,'None recorded');
+    const warnings=[];
+    if (candidate.boundary_warning) warnings.push(typeof candidate.boundary_warning==='string' ? candidate.boundary_warning : 'This candidate touches the crop boundary and may be incomplete.');
+    if (candidate.warning) warnings.push(String(candidate.warning));
+    text($('candidateWarning'),[...new Set(warnings)].join(' ')); $('candidateWarning').hidden=!warnings.length;
+  }
+  const cameras = {oblique:{eye:{x:1.4,y:-1.4,z:.95},up:{x:0,y:0,z:1}},front:{eye:{x:0,y:-2,z:0},up:{x:0,y:0,z:1}},side:{eye:{x:2,y:0,z:0},up:{x:0,y:0,z:1}},top:{eye:{x:0,y:0,z:2},up:{x:0,y:1,z:0}}};
+  async function applyMode(mode) {
+    app.mode=mode;
+    for (const button of document.querySelectorAll('[data-mode]')) button.setAttribute('aria-pressed',String(button.dataset.mode===mode));
+    if (!app.plotReady) return;
+    const available = Math.min(3,$('pointPlot').data?.length || 0);
+    const visibility = mode==='candidate' ? [true,false,true] : mode==='context' ? [false,true,false] : [true,true,true];
+    await Plotly.restyle('pointPlot',{visible:visibility.slice(0,available)},Array.from({length:available},(_,index)=>index));
+    if (available>1) await Plotly.restyle('pointPlot',{'marker.opacity':mode==='context' ? 1 : .23},[1]);
+  }
+  async function renderPlot(candidate) {
+    app.plotReady=false; $('pointPlot').hidden=false; $('plotFallback').hidden=true;
+    if (!window.Plotly || !candidate.plotly?.data?.length) {
+      $('pointPlot').hidden=true; $('plotFallback').hidden=false;
+      text($('plotFallback'),!window.Plotly ? 'The local 3D viewer could not load. The saved RGB views below are still available.' : 'No interactive point cloud is available for this candidate. Use the saved RGB views below.'); return;
+    }
+    const layout={...candidate.plotly.layout,autosize:true,height:undefined,margin:{l:10,r:10,b:25,t:5},paper_bgcolor:'#fbfcfd',showlegend:false};
+    layout.scene={...layout.scene,camera:cameras.oblique};
+    try {
+      await Plotly.react('pointPlot',candidate.plotly.data,layout,{responsive:true,displaylogo:false,scrollZoom:true,modeBarButtonsToRemove:['sendDataToCloud']});
+      app.plotReady=true; $('cameraSelect').value='oblique'; await applyMode(app.mode);
+    } catch (error) {
+      $('pointPlot').hidden=true; $('plotFallback').hidden=false;
+      text($('plotFallback'),'This browser could not display the interactive point cloud. The saved RGB views below remain available.');
+    }
+  }
+  function resetReveal() {
+    app.revealed=false; $('revealedPanel').hidden=true; $('revealedPanel').replaceChildren();
+    text($('revealButton'),'Reveal suggestions & geometry');
+  }
+  async function loadCandidate(id,{persist=true,discardDraft=false}={}) {
+    if (app.busy || !id) return;
+    captureDraft();
+    if (discardDraft) app.drafts.delete(id);
+    clearError(); setBusy(true);
+    try {
+      if (persist) await queuePosition(id,$('reviewerName').value.trim());
+      else await app.positionQueue.catch(()=>{});
+      const candidate=await api(`/api/candidate?id=${encodeURIComponent(id)}`);
+      if (candidate.id!==id) throw new Error('The server returned a different candidate. Reload this page before reviewing.');
+      app.candidate=candidate; app.state.current_id=id; $('candidateSelect').value=id;
+      resetReveal();
+      text($('candidateTitle'),displayId(candidate));
+      text($('pointCounts'),`${number(candidate.point_count)} candidate points · ${number(candidate.context_count)} context points`);
+      $('reviewBadge').classList.toggle('saved',Boolean(candidate.review)); text($('reviewBadge'),candidate.review ? 'Reviewed' : 'Not reviewed');
+      populateClasses();
+      const draft=app.drafts.get(id) || initialDraft(candidate); app.drafts.set(id,draft); fillForm(draft);
+      renderMetadata(candidate); renderImages(candidate); await renderPlot(candidate);
+    } catch (error) {
+      if (app.candidate) $('candidateSelect').value=app.candidate.id;
+      showError(error);
+    } finally { setBusy(false); }
+  }
+  function predictionBlock(label,prediction) {
+    const block=document.createElement('div'); block.className='prediction-block';
+    const heading=document.createElement('h3'); text(heading,label); block.append(heading);
+    const ranking=prediction?.ranking || prediction?.top5 || [];
+    if (!ranking.length) { const missing=document.createElement('p'); missing.className='note'; text(missing,prediction?.status || 'No cached predictions are available.'); block.append(missing); return block; }
+    const table=document.createElement('table'); table.className='ranking';
+    const thead=document.createElement('thead'), headrow=document.createElement('tr');
+    for (const value of ['Class description','Cosine']) { const th=document.createElement('th'); th.scope='col'; text(th,value); headrow.append(th); }
+    thead.append(headrow); table.append(thead); const tbody=document.createElement('tbody');
+    for (const row of ranking.slice(0,5)) {
+      const tr=document.createElement('tr'), name=document.createElement('td'), score=document.createElement('td');
+      text(name,row.class_description ?? row.class ?? row.label ?? '—');
+      const cosine=row.cosine_similarity ?? row.cosine ?? row.score;
+      text(score,Number.isFinite(Number(cosine)) && cosine!=null ? Number(cosine).toFixed(3) : '—');
+      tr.append(name,score); tbody.append(tr);
+    }
+    table.append(tbody); block.append(table);
+    const disagreement=prediction.top1_disagreement_fraction ?? prediction.view_disagreement_fraction ?? prediction.view_disagreement;
+    if (disagreement!=null && Number.isFinite(Number(disagreement))) { const note=document.createElement('p'); note.className='note'; text(note,`Top-choice disagreement across views: ${(Number(disagreement)*100).toFixed(0)}%`); block.append(note); }
+    return block;
+  }
+  async function reveal() {
+    if (app.busy || !app.candidate || app.revealed) return;
+    clearError(); setBusy(true); text($('revealButton'),'Loading details…');
+    const id=app.candidate.id;
+    try {
+      const result=await api('/api/reveal',{method:'POST',body:{candidate_id:id}});
+      if (app.candidate?.id!==id) return;
+      app.revealed=true; const panel=$('revealedPanel'); panel.replaceChildren(); panel.hidden=false;
+      const note=document.createElement('p'); text(note,'These are model suggestions, not human labels. Cosine scores are not probabilities. Your form choices have not changed.'); panel.append(note);
+      if (result.status || result.message) { const status=document.createElement('p'); text(status,result.status || result.message); panel.append(status); }
+      if (result.clip) {
+        panel.append(predictionBlock('Candidate-only model ranking',result.clip.candidate));
+        panel.append(predictionBlock('Wider scene context · separate ranking',result.clip.context));
+      } else { const missing=document.createElement('p'); text(missing,'No cached model predictions are available for this candidate.'); panel.append(missing); }
+      const details=document.createElement('details'); details.className='geometry-details';
+      const summary=document.createElement('summary'); text(summary,'Geometry details'); details.append(summary);
+      const content=document.createElement('div'); content.className='geometry-content'; const pre=document.createElement('pre');
+      text(pre,result.geometry ? JSON.stringify(result.geometry,null,2) : 'No cached geometry details are available.'); content.append(pre); details.append(content); panel.append(details);
+      text($('revealButton'),'Details revealed · recorded for this review');
+    } catch (error) { showError(error); text($('revealButton'),'Reveal suggestions & geometry'); }
+    finally { setBusy(false); }
+  }
+  async function saveReview(event) {
+    event.preventDefault();
+    if (app.busy || !app.candidate || !$('reviewForm').reportValidity()) return;
+    const draft=formValues();
+    if ($('humanClass').value==='__custom__' && !draft.human_class) { $('customClass').setCustomValidity('Enter a class name or choose Unknown.'); $('customClass').reportValidity(); return; }
+    captureDraft(); clearError(); app.saving=true; setBusy(true); text($('saveNext'),'Saving…');
+    const current=app.candidate;
+    const body={candidate_id:current.id,human_class:draft.human_class,crop_quality:draft.crop_quality,notes:draft.notes,
+                reviewer_name:$('reviewerName').value.trim(),expected_revision:Number(current.history_count)||0,advance:true};
+    if (draft.group_override !== (current.shared_object_group || '')) body.shared_object_group_override=draft.group_override;
+    try {
+      await app.positionQueue.catch(()=>{});
+      const result=await api('/api/review',{method:'POST',body});
+      if (result.saved===false) throw new Error('The server did not confirm that the review was saved.');
+      app.drafts.delete(current.id);
+      const entry=app.state.candidates.find(candidate=>candidate.id===current.id); if (entry) entry.reviewed=true;
+      if (draft.human_class && !values(app.state.classes).some(choice=>choice.value===draft.human_class)) app.state.classes.push(draft.human_class);
+      if (result.progress) { app.state.progress=result.progress; updateProgress(result.progress); }
+      populateQueue();
+      const allReviewed=Number(result.progress?.reviewed)>=Number(result.progress?.total) && Number(result.progress?.total)>0;
+      saveNotice(`Saved ${displayId(current)}.${allReviewed ? ' Every candidate in this queue now has a review.' : ' Your review is on disk.'}`);
+      // Remove the saved form before navigation so captureDraft cannot recreate
+      // it as an unsaved draft for the preceding candidate.
+      app.candidate=null; setBusy(false);
+      await loadCandidate(result.current_id || current.id,{persist:false});
+    } catch (error) {
+      showError(error,error.status===409);
+    } finally { app.saving=false; text($('saveNext'),'Save & next →'); setBusy(false); }
+  }
+
+  $('dismissError').addEventListener('click',clearError);
+  $('conflictReload').addEventListener('click',()=>{if(app.candidate) loadCandidate(app.candidate.id,{discardDraft:true});});
+  $('candidateSelect').addEventListener('change',event=>loadCandidate(event.target.value));
+  $('previousButton').addEventListener('click',()=>{const i=app.state.candidates.findIndex(candidate=>candidate.id===app.candidate?.id); if(i>0) loadCandidate(app.state.candidates[i-1].id);});
+  $('nextButton').addEventListener('click',()=>{const i=app.state.candidates.findIndex(candidate=>candidate.id===app.candidate?.id); if(i>=0&&i<app.state.candidates.length-1) loadCandidate(app.state.candidates[i+1].id);});
+  $('reviewerName').addEventListener('change',()=>{if(app.candidate&&!app.busy) queuePosition(app.candidate.id,$('reviewerName').value.trim()).catch(showError);});
+  $('reviewForm').addEventListener('input',event=>{if(event.target===$('customClass')) $('customClass').setCustomValidity(''); captureDraft(true);});
+  $('reviewForm').addEventListener('change',()=>captureDraft(true));
+  $('humanClass').addEventListener('change',()=>{toggleCustom(true); captureDraft(true);});
+  $('reviewForm').addEventListener('submit',saveReview);
+  $('revealButton').addEventListener('click',reveal);
+  for (const button of document.querySelectorAll('[data-mode]')) button.addEventListener('click',()=>applyMode(button.dataset.mode).catch(showError));
+  $('cameraSelect').addEventListener('change',()=>{if(app.plotReady) Plotly.relayout('pointPlot',{'scene.camera':cameras[$('cameraSelect').value]}).catch(showError);});
+  $('resetView').addEventListener('click',()=>{if(app.plotReady){$('cameraSelect').value='oblique'; Plotly.relayout('pointPlot',{'scene.camera':cameras.oblique}).catch(showError);}});
+  $('closeImage').addEventListener('click',()=>$('imageDialog').close());
+  $('imageDialog').addEventListener('click',event=>{if(event.target===$('imageDialog')) $('imageDialog').close();});
+  window.addEventListener('beforeunload',event=>{if([...app.drafts.values()].some(draft=>draft.dirty)){event.preventDefault();event.returnValue='';}});
+  if (window.ResizeObserver) new ResizeObserver(()=>{if(app.plotReady) Plotly.Plots.resize('pointPlot');}).observe($('pointPlot'));
+
+  async function initialize() {
+    setBusy(true);
+    try {
+      app.state=await api('/api/state');
+      if (!Array.isArray(app.state.candidates)) throw new Error('The local server returned an invalid candidate queue.');
+      if (!app.state.session_token) throw new Error('The server did not provide a review session token.');
+      app.state.classes=app.state.classes || []; app.state.crop_qualities=app.state.crop_qualities || [];
+      $('reviewerName').value=app.state.reviewer_name || '';
+      updateProgress(app.state.progress); populateQueue();
+      if (!app.state.candidates.length) { $('workspace').hidden=true; $('emptyState').hidden=false; return; }
+      const current=app.state.candidates.some(candidate=>candidate.id===app.state.current_id) ? app.state.current_id : app.state.candidates[0].id;
+      setBusy(false); await loadCandidate(current,{persist:false});
+    } catch (error) { showError(error); text($('candidateTitle'),'Could not load the review workspace'); }
+    finally { setBusy(false); }
+  }
+  initialize();
+  </script>
+</body>
+</html>

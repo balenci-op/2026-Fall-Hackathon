@@ -1,0 +1,19 @@
+# Python environments and caches
+.venv-ground/
+.venv/
+.cache-object/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Point clouds
+*.las
+*.laz
+
+# Generated outputs and cached experiments
+outputs/
+
+# Local credentials
+.env
+.env.*
+!.env.example

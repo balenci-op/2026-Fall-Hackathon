@@ -1,0 +1,14 @@
+Export unit: Meter
+
+Coordinate System
+  Coordinate system group: United States/NAD83
+  Zone: Oklahoma North 3501 (ftUS)
+  Datum transformation: NAD83(2011)  (Molodensky)
+  Geoid model: GEOID18 (Conus)
+  RTX datum: No
+  WKT (ESRI): PROJCS["Oklahoma North 3501 (ftUS)",GEOGCS["NAD83(2011)",DATUM["D_North_American_1983",SPHEROID["GRS_1980",6378137,298.2572221011,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","1116"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["Degree",0.01745329251994,AUTHORITY["EPSG","9102"]],AXIS["Long",EAST],AXIS["Lat",NORTH],AUTHORITY["EPSG","6318"]],PROJECTION["Lambert_Conformal_Conic"],PARAMETER["False_Easting",600000],PARAMETER["False_Northing",0],PARAMETER["Latitude_Of_Origin",35],PARAMETER["Central_Meridian",-98],PARAMETER["Standard_Parallel_1",36.76666666667],PARAMETER["Standard_Parallel_2",35.56666666667],UNIT["Meter",1,AUTHORITY["EPSG","9001"]],AXIS["East",EAST],AXIS["North",NORTH],AUTHORITY["EPSG","6553"]]
+  WKT (GDAL): PROJCS["Oklahoma North 3501 (ftUS)",GEOGCS["NAD83(2011)",DATUM["NAD83 (National Spatial Reference System 2011)",SPHEROID["GRS 1980",6378137,298.2572221011,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","1116"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["Degree",0.01745329251994,AUTHORITY["EPSG","9102"]],AXIS["Long",EAST],AXIS["Lat",NORTH],AUTHORITY["EPSG","6318"]],PROJECTION["Lambert_Conformal_Conic_2SP"],PARAMETER["False_Easting",600000],PARAMETER["False_Northing",0],PARAMETER["Latitude_Of_Origin",35],PARAMETER["Central_Meridian",-98],PARAMETER["Standard_Parallel_1",36.76666666667],PARAMETER["Standard_Parallel_2",35.56666666667],UNIT["Meter",1,AUTHORITY["EPSG","9001"]],AXIS["East",EAST],AXIS["North",NORTH],AUTHORITY["EPSG","6553"]]
+
+X scale factor: 0.9999125334
+Y scale factor: 0.9999125334
+Z scale factor: 1.0000000000
